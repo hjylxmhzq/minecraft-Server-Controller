@@ -1,0 +1,24 @@
+{
+  "name": "myapi",
+  "version": "1.0.0",
+  "description": "universe api for my server",
+  "main": "index.js",
+  "scripts": {
+    "test": "cross-env NODE_ENV=development node server.js",
+    "run": "cross-env NODE_ENV=production node server.js"
+  },
+  "author": "tonyWho",
+  "license": "ISC",
+  "devDependencies": {
+    "koa": "^2.7.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "request": "^2.88.0"
+  },
+  "dependencies": {
+    "cross-env": "^6.0.3",
+    "koa-bodyparser": "^4.2.1",
+    "mongodb": "^3.3.2",
+    "saslprep": "^1.0.3"
+  }
+}
