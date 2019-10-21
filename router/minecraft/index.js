@@ -6,7 +6,7 @@ const config = require('../../config');
 const fs = require('fs');
 
 function getCurrentProcess() {
-    const output = execSync('ps -e | grep server.jar', { cwd: path.resolve('.') });
+    const output = execSync('ps -ax | grep server.jar', { cwd: path.resolve('.') });
     const processList = output.toString().split('\n');
     const processInfo = processList.find(item => {
         return item.includes('java');
@@ -25,7 +25,11 @@ function startServer() {
     if (JSON.parse(getCurrentProcess()).pid) {
         return JSON.stringify({pid: -1, message: 'server is already running'});
     }
-    const output = exec(`java -Xms${config.javaParams.xms} -Xmx${config.javaParams.xmx} -jar ${path.resolve(__dirname, '../../private/mcserver/server.jar')} nogui`, { cwd: path.resolve(__dirname, '../../private/mcserver/') });
+    const output = exec(`java -Xms${config.javaParams.xms} -Xmx${config.javaParams.xmx} -jar ${path.resolve(__dirname, '../../private/mcserver/server.jar')} nogui`,
+    { cwd: path.resolve(__dirname, '../../private/mcserver/') },
+    (err, stdout, stderr) => {
+        console.log(err, stdout, stderr);
+    });
     return JSON.stringify({pid: output.pid, message: 'server started'});
 }
 
